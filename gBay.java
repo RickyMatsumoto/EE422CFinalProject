@@ -1,0 +1,2 @@
+public class gBay {
+}

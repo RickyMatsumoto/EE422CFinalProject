@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="115.0" maxWidth="385.0" prefHeight="115.0" prefWidth="385.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.Listing">
+   <children>
+      <Text layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TEST_ITEM">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$00.00">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="276.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00 REMAINING" />
+      <Button fx:id="bidBut" layoutX="340.0" layoutY="44.0" mnemonicParsing="false" onAction="#bid" text="Bid" />
+      <Button layoutX="309.0" layoutY="76.0" mnemonicParsing="false" text="Buy Now" />
+      <Text layoutX="14.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BUY NOW FOR $00.00" />
+      <Text layoutX="14.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BUY NOW FOR $00.00" />
+      <TextField fx:id="bidText" layoutX="291.0" layoutY="45.0" onAction="#takeBid" prefHeight="25.0" prefWidth="82.0" promptText="\$00.00" visible="false" />
+   </children>
+</Pane>

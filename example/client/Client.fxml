@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="example.client.gBay">
+   <center>
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="516.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+        <content>
+          <AnchorPane maxWidth="400.0" minHeight="600.0" minWidth="400.0" prefHeight="600.0" prefWidth="200.0">
+               <children>
+                  <Pane maxHeight="115.0" maxWidth="385.0" prefHeight="115.0" prefWidth="385.0">
+                     <children>
+                        <Text layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TEST_ITEM">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$00.00">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="276.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00 REMAINING" />
+                        <Button fx:id="bidBut" layoutX="340.0" layoutY="44.0" mnemonicParsing="false" onAction="#bid" text="Bid" />
+                        <Button layoutX="309.0" layoutY="76.0" mnemonicParsing="false" text="Buy Now" />
+                        <Text layoutX="14.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BUY NOW FOR $00.00" />
+                        <Text layoutX="14.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BUY NOW FOR $00.00" />
+                        <TextField fx:id="bidText" layoutX="291.0" layoutY="45.0" onAction="#takeBid" prefHeight="25.0" prefWidth="82.0" promptText="\$00.00" visible="false" />
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </center>
+   <top>
+      <SplitPane blendMode="SRC_ATOP" dividerPositions="0.3333" prefHeight="80.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Text fill="#d71515" layoutX="14.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="gBay">
+                     <font>
+                        <Font name="Calibri" size="37.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Hyperlink layoutX="219.0" layoutY="28.0" onAction="#quit" text="quit" underline="true" />
+                  <Hyperlink layoutX="169.0" layoutY="28.0" text="my bids" underline="true" />
+                  <Hyperlink layoutX="143.0" layoutY="28.0" text="sell" underline="true" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </top>
+   <bottom>
+      <Pane prefHeight="30.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="249.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tatsushi Matsumoto 2020" />
+         </children>
+      </Pane>
+   </bottom>
+</BorderPane>
