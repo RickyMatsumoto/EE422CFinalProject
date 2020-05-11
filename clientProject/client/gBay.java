@@ -14,6 +14,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,6 +27,8 @@ public class gBay implements Initializable {
     private ScrollPane scroll;
     @FXML
     public VBox vbox;
+    @FXML
+    public Text username;
 
     @FXML
     private void quit(ActionEvent event) {
@@ -45,6 +48,8 @@ public class gBay implements Initializable {
         });
     }
 
-
+    public void setUsername(String name){
+        username.setText(name);
+    }
 
 }

@@ -5,6 +5,7 @@ public class Item {
     public double price;
     public double buyNow;
     public int time;
+    public String customer;
 
     public Item(String name, double price, double buyNow, int time){
         this.name = name;
@@ -13,12 +14,21 @@ public class Item {
         this.time = time;
     }
 
-    public boolean bid(double bid){
-        if(bid > price){
+    public boolean bid(double bid, String customer){
+        if(bid > price && bid < buyNow){
             price = bid;
+            this.customer = customer;
+            if(bid * 2 > buyNow){
+                buyNow = bid*2;
+            }
             return true;
         } else {
             return false;
         }
+    }
+
+    public boolean decrementSecond(){
+        time--;
+        return time > 0;
     }
 }

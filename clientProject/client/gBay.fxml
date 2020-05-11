@@ -33,8 +33,9 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <Hyperlink layoutX="219.0" layoutY="28.0" onAction="#quit" text="quit" underline="true" />
-                  <Hyperlink layoutX="169.0" layoutY="28.0" text="my bids" underline="true" />
-                  <Hyperlink layoutX="143.0" layoutY="28.0" text="sell" underline="true" />
+                  <Hyperlink layoutX="141.0" layoutY="28.0" text="past auctions" underline="true" />
+                  <Hyperlink layoutX="115.0" layoutY="28.0" text="sell" underline="true" />
+                  <Text fx:id="username" layoutX="131.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="RIGHT" wrappingWidth="117.0" />
                </children>
             </AnchorPane>
         </items>

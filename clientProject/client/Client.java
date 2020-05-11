@@ -4,6 +4,9 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.net.Socket;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import javafx.application.Application;
@@ -20,15 +23,32 @@ public class Client extends Application {
   private BufferedReader fromServer;
   private PrintWriter toServer;
   public gBay controller;
-  private HashMap<Integer, Listing> listings = new HashMap<>();
+  public Parent root;
+  public HashMap<Integer, Listing> listings = new HashMap<>();
+  public static Client thisClient;
+  public static Stage mainStage;
 
 
   @Override
   public void start(Stage stage) throws Exception {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("Client.fxml"));
-    Parent root = loader.load();
-    controller = loader.getController();
-    setUpNetworking();
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+    Parent base = loader.load();
+    Login control = loader.getController();
+    Scene scene = new Scene(base);
+    stage.setScene(scene);
+    stage.setTitle("gBay");
+    mainStage = stage;
+    thisClient = this;
+    stage.show();
+  }
+
+  public void homePage(Stage stage) throws Exception {
+    if(root == null){
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("gBay.fxml"));
+      root = loader.load();
+      controller = loader.getController();
+      setUpNetworking();
+    }
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.setTitle("gBay");
@@ -78,18 +98,31 @@ public class Client extends Application {
       }
     });
 
+
     readerThread.start();
     writerThread.start();
   }
 
   protected void processRequest(Message input) {
     switch(input.code){
-      case 0:
+      case 0:             //initialize listings
         initListings(input.content);
         break;
 
-      case 1:
+      case 1:             //update price after a bid
         updatePrice(input.content);
+        break;
+
+      case 2:             //get guest number
+        if(Login.clientID.equals("guest")){
+          Login.clientID = Login.clientID + input.content;
+        }
+        controller.setUsername(Login.clientID);
+        sendUserID();
+        break;
+
+      case 3:             //close an auction
+        closeBidding(input.content);
         break;
 
 
@@ -106,7 +139,7 @@ public class Client extends Application {
 
   protected void bidToServer(String item, String amount) {
     double output = Double.parseDouble(amount);
-    sendToServer("2 " + item + " " + output);
+    sendToServer("2 " + item + " " + output + " " + Login.clientID);
   }
 
   public void initListings(String message){
@@ -139,22 +172,29 @@ public class Client extends Application {
         e.printStackTrace();
       }
     }
+    Timer timer = new Timer();
+    timer.schedule(new countdownTimer(), 0, 1000);
   }
 
   public void updatePrice(String message){
     String[] messageArr = message.split(" ");
     String name = messageArr[0];
     double price = Double.parseDouble(messageArr[1]);
+    double buyNow = Double.parseDouble(messageArr[2]);
+    String customer = messageArr[3];
     Item found;
     for(Item item : Data.items){
       if(item.name.equals(name)){
         item.price = price;
+        item.buyNow = buyNow;
+        item.customer = customer;
         found = item;
         Listing listing = listings.get(found.id);
         Platform.runLater(new Runnable() {
           @Override
           public void run() {
             listing.setPrice(price);
+            listing.setPriceBuyNow(buyNow);
           }
         });
         break;
@@ -162,4 +202,40 @@ public class Client extends Application {
     }
   }
 
+
+  private void sendUserID(){
+    sendToServer("0 " + Login.clientID);
+  }
+
+  private void closeBidding(String message) {
+    String[] messageArr = message.split(" ");
+    String name = messageArr[0];
+    double price = Double.parseDouble(messageArr[1]);
+    String customer = messageArr[2];
+    for (Item item : Data.items) {
+      if(item.name.equals(name)){
+        item.price = price;
+        item.customer = customer;
+        Data.sold.add(item);
+        Data.items.remove(item);
+        break;
+      }
+    }
+  }
+}
+
+class countdownTimer extends TimerTask {
+
+  @Override
+  public void run() {
+    for (Item item : Data.items) {
+      Listing listing = Client.thisClient.listings.get(item.id);
+      Platform.runLater(new Runnable() {
+        @Override
+        public void run() {
+          listing.decrementSecond();
+        }
+      });
+    }
+  }
 }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.Sold">
+   <center>
+      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefWidth="400.0" BorderPane.alignment="CENTER">
+        <content>
+          <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="400.0" minHeight="800.0" minWidth="400.0" prefHeight="800.0" prefWidth="400.0">
+               <children>
+                  <VBox fx:id="vbox" prefHeight="678.0" prefWidth="385.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </center>
+   <top>
+      <SplitPane blendMode="SRC_ATOP" dividerPositions="0.3333" prefHeight="80.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Text fill="#d71515" layoutX="14.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="gBay">
+                     <font>
+                        <Font name="Calibri" size="37.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Hyperlink layoutX="219.0" layoutY="28.0" onAction="#quit" text="quit" underline="true" />
+                  <Hyperlink layoutX="125.0" layoutY="28.0" onAction="#goHome" text="current auctions" underline="true" />
+                  <Text fx:id="username" layoutX="131.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="RIGHT" wrappingWidth="117.0" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </top>
+   <bottom>
+      <Pane prefHeight="30.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="249.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tatsushi Matsumoto 2020" />
+         </children>
+      </Pane>
+   </bottom>
+</BorderPane>

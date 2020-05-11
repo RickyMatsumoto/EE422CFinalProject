@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 public class Login implements Initializable {
 
 
-    public String clientID;
+    public static String clientID;
 
     @FXML
     private TextField user;
@@ -24,10 +24,15 @@ public class Login implements Initializable {
 
     }
 
-    public void login(javafx.event.ActionEvent actionEvent) {
+    @FXML
+    public void login(javafx.event.ActionEvent actionEvent) throws Exception {
         clientID = user.getText();
+        Client.thisClient.homePage(Client.mainStage);
     }
 
-    public void guest(javafx.event.ActionEvent actionEvent) {
+    @FXML
+    public void guest(javafx.event.ActionEvent actionEvent) throws Exception {
+        clientID = "guest";
+        Client.thisClient.homePage(Client.mainStage);
     }
 }

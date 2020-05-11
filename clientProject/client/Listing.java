@@ -17,6 +17,7 @@ public class Listing implements Initializable {
 
     public Client parent;
     public int id;
+    public int timeInt;
 
     @FXML
     private Text name;
@@ -30,10 +31,13 @@ public class Listing implements Initializable {
     private Button bidBut;
     @FXML
     private TextField bidText;
+    @FXML
+    private Text invalid;
 
     @FXML
     private void bid(ActionEvent event){
         bidBut.setVisible(false);
+        invalid.setVisible(false);
         bidText.setVisible(true);
     }
 
@@ -45,7 +49,17 @@ public class Listing implements Initializable {
         bidText.clear();
         bidText.setVisible(false);
         bidBut.setVisible(true);
-        parent.bidToServer(name.getText(), in);
+        for (Item item : Data.items) {
+            if(name.getText().equals(item.name)){
+                if(item.bid(Double.parseDouble(in))){
+                    parent.bidToServer(name.getText(), in);
+                } else {
+                    invalidBid();
+                }
+                return;
+            }
+        }
+        invalidBid();
     }
 
     public void updateListing(Item item){
@@ -78,6 +92,7 @@ public class Listing implements Initializable {
     }
 
     public void setTime(int time){
+        timeInt = time;
         String hours = Integer.toString(time / 3600);
         String minutes = Integer.toString((time / 60) % 60);
         String seconds = Integer.toString(time % 60);
@@ -91,5 +106,21 @@ public class Listing implements Initializable {
             seconds = "0" + seconds;
         }
         this.time.setText(hours + ":" + minutes + ":" + seconds + " remaining");
+    }
+
+    public void decrementSecond(){
+        timeInt--;
+        if(timeInt <= 0){
+            timeIsOut();
+        }
+        setTime(timeInt);
+    }
+
+    public void timeIsOut(){
+        setTime(0);
+    }
+
+    public void invalidBid(){
+        invalid.setVisible(true);
     }
 }

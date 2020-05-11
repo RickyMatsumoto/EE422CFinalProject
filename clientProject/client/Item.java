@@ -6,6 +6,7 @@ public class Item {
     public double price;
     public double buyNow;
     public int time;
+    public String customer;
 
     public Item(String name, double price, double buyNow, int time, int id){
         this.name = name;
@@ -15,9 +16,12 @@ public class Item {
         this.id = id;
     }
 
-    public boolean bid(int bid){
-        if(bid > price){
+    public boolean bid(double bid){
+        if(bid > price && bid < buyNow){
             price = bid;
+            if(bid * 2 > buyNow){
+                buyNow = bid*2;
+            }
             return true;
         } else {
             return false;
