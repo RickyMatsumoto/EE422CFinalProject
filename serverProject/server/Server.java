@@ -8,13 +8,15 @@ import com.google.gson.Gson;
 
 class Server extends Observable {
 
+  public static Data data;
+
   public static void main(String[] args) {
     new Server().runServer();
   }
 
   private void runServer() {
     try {
-      new Data();
+      data = new Data();
       setUpNetworking();
     } catch (Exception e) {
       e.printStackTrace();
@@ -37,30 +39,40 @@ class Server extends Observable {
     }
   }
 
-  protected void processRequest(String input) {
-    String output = "Error";
-    Gson gson = new Gson();
-    Message message = gson.fromJson(input, Message.class);
+  protected void processRequest(Message input) {
+    String output = "0";
+//    Gson gson = new Gson();
+//    Message message = gson.fromJson(input, Message.class);
     try {
       String temp = "";
-      switch (message.type) {
-        case "upper":
-          temp = message.input.toUpperCase();
+      switch (input.code) {
+        case 2:
+          String[] split = input.content.split(" ");
+          Item item = data.getItem(split[0]);
+          if(item != null){
+            double bid = Double.parseDouble(split[1]);
+            if(item.bid(bid)){
+              item.price = bid;
+              output = data.getPriceUpdateMessage(item);
+              //update everyone on new bid price
+            } else {
+              //send invalid bid price
+            }
+            this.setChanged();
+            this.notifyObservers(output);
+          }
           break;
-        case "lower":
-          temp = message.input.toLowerCase();
+
+        default:
           break;
-        case "strip":
-          temp = message.input.replace(" ", "");
-          break;
+
       }
-      output = "";
-      for (int i = 0; i < message.number; i++) {
-        output += temp;
-        output += " ";
-      }
-      this.setChanged();
-      this.notifyObservers(output);
+//      output = "";
+//      for (int i = 0; i < message.number; i++) {
+//        output += temp;
+//        output += " ";
+//      }
+
     } catch (Exception e) {
       e.printStackTrace();
     }

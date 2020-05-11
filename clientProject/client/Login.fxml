@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.Login">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d8dbdd" height="700.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
+      <Text fill="#d71515" layoutX="107.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="gBay">
+         <font>
+            <Font name="Calibri" size="96.0" />
+         </font>
+      </Text>
+      <TextField fx:id="user" layoutX="126.0" layoutY="325.0" onAction="#login" promptText="Username" />
+      <Button fx:id="guest" layoutX="143.0" layoutY="387.0" mnemonicParsing="false" onAction="#guest" text="Continue As Guest" />
+      <Text layoutX="189.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="or" />
+   </children>
+</Pane>

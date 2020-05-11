@@ -13,7 +13,7 @@ public class Item {
         this.time = time;
     }
 
-    public boolean bid(int bid){
+    public boolean bid(double bid){
         if(bid > price){
             price = bid;
             return true;

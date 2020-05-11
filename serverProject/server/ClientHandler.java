@@ -9,14 +9,14 @@ class ClientHandler implements Runnable, Observer {
 
   private Server server;
   private Socket clientSocket;
-  private DataInputStream fromClient;
+  private BufferedReader fromClient;
   private PrintWriter toClient;
 
   protected ClientHandler(Server server, Socket clientSocket) {
     this.server = server;
     this.clientSocket = clientSocket;
     try {
-      fromClient = new DataInputStream(this.clientSocket.getInputStream());
+      fromClient = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));
       toClient = new PrintWriter(this.clientSocket.getOutputStream());
     } catch (IOException e) {
       e.printStackTrace();
@@ -31,19 +31,14 @@ class ClientHandler implements Runnable, Observer {
 
   @Override
   public void run() {
+    sendToClient(Server.data.getInitMessage());
     String input;
     try {
       boolean done = false;
-      while(!done){
-        byte type = fromClient.readByte();
-        switch(type){
-          case 1:
-            String in = fromClient.readUTF();
-        }
-      }
       while ((input = fromClient.readLine()) != null) {
         System.out.println("From client: " + input);
-        server.processRequest(input);
+        Message in = new Message(input);
+        server.processRequest(in);
       }
     } catch (IOException e) {
       e.printStackTrace();

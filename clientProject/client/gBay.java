@@ -1,6 +1,7 @@
 package client;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,41 +25,7 @@ public class gBay implements Initializable {
     @FXML
     private ScrollPane scroll;
     @FXML
-    private VBox vbox;
-
-
-    public void initScroll(String message){
-        String[] messageArr = message.split(" ");
-        int numItems = Integer.parseInt(messageArr[0]);
-        String name;
-        double price;
-        double buyNow;
-        int time;
-        for(int i = 1; i <= numItems; i++){
-            int j = i;
-            if(i != 1){
-                j = (j * 4) + 1;
-            }
-            name = messageArr[j];
-            j++;
-            price = Double.parseDouble(messageArr[j]);
-            j++;
-            buyNow = Double.parseDouble(messageArr[j]);
-            j++;
-            time = Integer.parseInt(messageArr[j]);
-            Item add = new Item(name, price, buyNow, time);
-            Data.items.add(add);
-        }
-        for(Item item : Data.items){
-            try {
-                Node listing = FXMLLoader.load(getClass().getResource("Listing.fxml"));
-
-            }
-
-        }
-    }
-
-
+    public VBox vbox;
 
     @FXML
     private void quit(ActionEvent event) {
@@ -67,15 +34,17 @@ public class gBay implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Node item1 = null;
-        Node item2 = null;
-        try {
-            item1 = FXMLLoader.load(getClass().getResource("Listing.fxml"));
-            item2 = FXMLLoader.load(getClass().getResource("Listing.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        vbox.getChildren().add(item1);
-        vbox.getChildren().add(item2);
     }
+
+    public void add(Node in){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                vbox.getChildren().add(in);
+            }
+        });
+    }
+
+
+
 }
