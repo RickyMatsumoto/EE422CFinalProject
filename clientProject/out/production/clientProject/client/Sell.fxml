@@ -6,13 +6,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.Sold">
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.Sell">
    <center>
-      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" minHeight="800.0" prefHeight="800.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefWidth="400.0" BorderPane.alignment="CENTER">
         <content>
           <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="400.0" minHeight="800.0" minWidth="400.0" prefHeight="800.0" prefWidth="400.0">
                <children>
-                  <VBox fx:id="vbox" prefHeight="678.0" prefWidth="385.0" />
+                  <TextField fx:id="nameText" layoutX="14.0" layoutY="14.0" promptText="Item Name" />
+                  <TextField fx:id="startPriceText" layoutX="217.0" layoutY="14.0" prefHeight="25.0" prefWidth="80.0" promptText="Start Price" />
+                  <TextField fx:id="buyNowText" layoutX="304.0" layoutY="14.0" prefHeight="25.0" prefWidth="67.0" promptText="Buy Now" />
+                  <TextField fx:id="timeText" layoutX="218.0" layoutY="47.0" prefHeight="25.0" prefWidth="79.0" promptText="Time (min)" />
+                  <Button layoutX="305.0" layoutY="47.0" mnemonicParsing="false" onAction="#list" prefHeight="25.0" prefWidth="67.0" text="List" />
+                  <Text fx:id="invalid" fill="RED" layoutX="40.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invalid input!" visible="false" wrappingWidth="97.13671875">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
                </children>
             </AnchorPane>
         </content>
@@ -33,7 +42,7 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <Hyperlink layoutX="219.0" layoutY="28.0" onAction="#quit" text="quit" underline="true" />
-                  <Hyperlink layoutX="125.0" layoutY="28.0" onAction="#goHome" text="current auctions" underline="true" />
+                  <Hyperlink layoutX="186.0" layoutY="28.0" onAction="#back" text="back" underline="true" />
                   <Text fx:id="username" layoutX="131.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="RIGHT" wrappingWidth="117.0" />
                </children>
             </AnchorPane>

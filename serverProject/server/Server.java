@@ -49,23 +49,37 @@ class Server extends Observable {
 
   protected void processRequest(Message input, ClientHandler client) {
     String output = null;
-//    Gson gson = new Gson();
-//    Message message = gson.fromJson(input, Message.class);
     try {
       String[] split = input.content.split(" ");
       switch (input.code) {
         case 0:
           client.username = split[0];
           break;
-          
-        case 2:
-          Item item = data.getItem(split[0]);
-          String customer = split[1];
+
+        case 1:
           synchronized(o){
+            Item item = data.getItem(split[0]);
+            item.time = -1;
+            item.price = item.buyNow;
+            item.customer = split[1];
+            output = data.getPriceUpdateMessage(item);
+            this.setChanged();
+            this.notifyObservers(output);
+            output = data.closeBidding(item);
+            this.setChanged();
+            this.notifyObservers(output);
+          }
+          break;
+
+        case 2:
+          synchronized(o){
+            Item item = data.getItem(split[0]);
+            String customer = split[2];
             if(item != null){
               double bid = Double.parseDouble(split[1]);
               if(item.bid(bid, customer)){
                 item.price = bid;
+                item.customer = customer;
                 output = data.getPriceUpdateMessage(item);
                 //update everyone on new bid price
               } else {
@@ -77,15 +91,21 @@ class Server extends Observable {
             break;
           }
 
+        case 3:
+          String name = split[0];
+          double price = Double.parseDouble(split[1]);
+          double buyNow = Double.parseDouble(split[2]);
+          int time = 60 * Integer.parseInt(split[3]);
+          Item add = new Item(name, price, buyNow, time, null);
+          output = data.list(add);
+          this.setChanged();
+          this.notifyObservers(output);
+          break;
+
         default:
           break;
 
       }
-//      output = "";
-//      for (int i = 0; i < message.number; i++) {
-//        output += temp;
-//        output += " ";
-//      }
 
     } catch (Exception e) {
       e.printStackTrace();

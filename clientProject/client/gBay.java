@@ -2,6 +2,7 @@ package client;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,14 +15,20 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class gBay implements Initializable {
+
 
     @FXML
     private ScrollPane scroll;
@@ -48,8 +55,42 @@ public class gBay implements Initializable {
         });
     }
 
+    public void remove(Listing rem) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                vbox.getChildren().remove(rem.node);
+            }
+        });
+    }
+
     public void setUsername(String name){
         username.setText(name);
     }
 
+    public void historyPage(ActionEvent actionEvent) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Client.thisClient.historyPage(Client.mainStage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void sell(ActionEvent actionEvent) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Client.thisClient.sellPage(Client.mainStage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 }

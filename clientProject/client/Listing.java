@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -20,7 +21,9 @@ public class Listing implements Initializable {
     public int timeInt;
 
     @FXML
-    private Text name;
+    public Pane node;
+    @FXML
+    public Text name;
     @FXML
     private Text price;
     @FXML
@@ -31,6 +34,8 @@ public class Listing implements Initializable {
     private Button bidBut;
     @FXML
     private TextField bidText;
+    @FXML
+    private Button buyBut;
     @FXML
     private Text invalid;
 
@@ -70,13 +75,16 @@ public class Listing implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-    public void setup(String name, double price, double priceBuyNow, int time, Client parent, int id){
+    public void setup(String name, double price, double priceBuyNow, int time, Client parent, int id, String customer){
         setName(name);
         setPrice(price);
         setPriceBuyNow(priceBuyNow);
         setTime(time);
         this.parent = parent;
         this.id = id;
+        if(time <= 0){
+            close(customer);
+        }
     }
 
     public void setName(String name){
@@ -122,5 +130,21 @@ public class Listing implements Initializable {
 
     public void invalidBid(){
         invalid.setVisible(true);
+    }
+
+    public void close(String customer) {
+        if(!customer.equals("null")) {
+            time.setText("Sold to " + customer);
+        } else {
+            time.setText("Unsold");
+        }
+        bidBut.setVisible(false);
+        bidText.setVisible(false);
+        priceBuyNow.setVisible(false);
+        buyBut.setVisible(false);
+    }
+
+    public void buyNow(ActionEvent actionEvent) {
+        parent.sendToServer("1 " + name.getText() + " " + Login.clientID);
     }
 }

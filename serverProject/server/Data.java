@@ -33,8 +33,16 @@ public class Data {
                 price = Integer.parseInt(br.readLine());
                 buyNow = Integer.parseInt(br.readLine());
                 time = Integer.parseInt(br.readLine());
-                Item add = new Item(name, price, buyNow, time);
+                Item add = new Item(name, price, buyNow, time, null);
                 items.add(add);
+            }
+            name = br.readLine();
+            numItems = Integer.parseInt(name);
+            for(int i = 0; i < numItems; i++){
+                name = br.readLine();
+                price = Integer.parseInt(br.readLine());
+                Item sold = new Item(name, price, 0, -1, br.readLine());
+                sold(sold);
             }
             Timer timer = new Timer();
             timer.schedule(new countdownTimer(), 0, 1000);
@@ -43,16 +51,24 @@ public class Data {
         }
     }
 
-    public void list(Item add){
+    public String list(Item add){
         items.add(add);
+        return("4 " + add.name + " " + add.price + " " + add.buyNow + " " + add.time);
     }
 
     public void sold(Item add){
         sold.add(add);
+        if(sold.size() > 7) {
+            sold.remove(0);
+        }
     }
 
     public static ArrayList<Item> getItems(){
         return items;
+    }
+
+    public static ArrayList<Item> getSold() {
+        return sold;
     }
 
     public Item getItem(String name){
@@ -69,6 +85,10 @@ public class Data {
         result.append("0 ").append(items.size());
         for(Item item : items){
             result.append(" ").append(item.name).append(" ").append(item.price).append(" ").append(item.buyNow).append(" ").append(item.time);
+        }
+        result.append(" ").append(sold.size());
+        for(Item item : sold){
+            result.append(" ").append(item.name).append(" ").append(item.price).append(" ").append(item.customer);
         }
         return result.toString();
     }

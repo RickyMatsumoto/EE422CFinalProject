@@ -6,10 +6,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.Login">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.Login">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d8dbdd" height="700.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d8dbdd" height="900.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
       <Text fill="#d71515" layoutX="107.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="gBay">
          <font>
             <Font name="Calibri" size="96.0" />

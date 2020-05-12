@@ -8,7 +8,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gBay">
    <center>
-      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefWidth="400.0" BorderPane.alignment="CENTER">
+      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" minHeight="800.0" prefHeight="800.0" prefWidth="400.0" BorderPane.alignment="CENTER">
         <content>
           <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="400.0" minHeight="800.0" minWidth="400.0" prefHeight="800.0" prefWidth="400.0">
                <children>
@@ -33,8 +33,8 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <Hyperlink layoutX="219.0" layoutY="28.0" onAction="#quit" text="quit" underline="true" />
-                  <Hyperlink layoutX="141.0" layoutY="28.0" text="past auctions" underline="true" />
-                  <Hyperlink layoutX="115.0" layoutY="28.0" text="sell" underline="true" />
+                  <Hyperlink layoutX="141.0" layoutY="28.0" onAction="#historyPage" text="past auctions" underline="true" />
+                  <Hyperlink layoutX="115.0" layoutY="28.0" onAction="#sell" text="sell" underline="true" />
                   <Text fx:id="username" layoutX="131.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="RIGHT" wrappingWidth="117.0" />
                </children>
             </AnchorPane>

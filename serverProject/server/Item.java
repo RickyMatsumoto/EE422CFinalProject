@@ -7,11 +7,12 @@ public class Item {
     public int time;
     public String customer;
 
-    public Item(String name, double price, double buyNow, int time){
+    public Item(String name, double price, double buyNow, int time, String customer){
         this.name = name;
         this.price = price;
         this.buyNow = buyNow;
         this.time = time;
+        this.customer = customer;
     }
 
     public boolean bid(double bid, String customer){
