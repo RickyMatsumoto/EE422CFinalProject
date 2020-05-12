@@ -1,5 +1,14 @@
-package server;
+// Copy-paste this file at the top of every file you turn in.
+/*
+ * EE422C Final Project submission by
+ * Replace <...> with your actual data.
+ * Tatsushi Matsumoto
+ * trm2796
+ * 16295
+ * Spring 2020
+ */
 
+package server;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -30,8 +39,8 @@ public class Data {
             int time;
             for(int i = 0; i < numItems; i++){
                 name = br.readLine();
-                price = Integer.parseInt(br.readLine());
-                buyNow = Integer.parseInt(br.readLine());
+                price = Double.parseDouble(br.readLine());
+                buyNow = Double.parseDouble(br.readLine());
                 time = Integer.parseInt(br.readLine());
                 Item add = new Item(name, price, buyNow, time, null);
                 items.add(add);
@@ -40,7 +49,7 @@ public class Data {
             numItems = Integer.parseInt(name);
             for(int i = 0; i < numItems; i++){
                 name = br.readLine();
-                price = Integer.parseInt(br.readLine());
+                price = Double.parseDouble(br.readLine());
                 Item sold = new Item(name, price, 0, -1, br.readLine());
                 sold(sold);
             }
